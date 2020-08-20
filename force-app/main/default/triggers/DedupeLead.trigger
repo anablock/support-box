@@ -12,10 +12,10 @@ trigger DedupeLead on Lead (before insert) {
         List<Contact> matchingContacts = [SELECT Id
                                             FROM Contact
                                            WHERE Email = :myLead.Email];
-        System.debug(matchingContact.size() + ' contact(s) found.');
+        System.debug(matchingContacts.size() + ' contact(s) found.');
 
         // If matches are found
-        if (!matchingContact.isEmpty()) {
+        if (!matchingContacts.isEmpty()) {
 
             // Assign the lead to the data quality queue
             myLead.OwnerId = dataQualityGroup.Id;
